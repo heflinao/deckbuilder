@@ -15,7 +15,7 @@ defmodule DeckBuilder.CardImporter do
   end
 
   defp response_for_page(page) do
-    %{body: body} = HTTPotion.get("https://api.deckbrew.com/mtg/cards?page=" <> to_string(page))
+    %{body: body} = HTTPotion.get("https://api.deckbrew.com/mtg/cards?page=" <> to_string(page), hackney: [:insecure])
     body
   end
 
