@@ -1,9 +1,9 @@
 defmodule DeckBuilder.CardImporter do
   alias DeckBuilder.Repo
   alias DeckBuilder.Card
-  HTTPotion.start
 
   def import do
+    HTTPotion.start
     DeckBuilder.Repo.start_link
     
     # there are 164 card pages in the deckbrew api
@@ -15,7 +15,7 @@ defmodule DeckBuilder.CardImporter do
   end
 
   defp response_for_page(page) do
-    %{body: body} = HTTPotion.get("https://api.deckbrew.com/mtg/cards?page=" <> to_string(page), hackney: [:insecure])
+    %{body: body} = HTTPotion.get("https://api.deckbrew.com/mtg/cards?page=" <> to_string(page))
     body
   end
 
