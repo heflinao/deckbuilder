@@ -19,7 +19,7 @@ defmodule DeckBuilder.Mixfile do
   def application do
     [mod: {DeckBuilder, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :httpotion]]
   end
 
   # Specifies which paths to compile per environment.
@@ -37,7 +37,9 @@ defmodule DeckBuilder.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
-     {:hound, "~> 0.8"}]
+     {:hound, "~> 0.8"},
+     {:httpotion, "~> 3.0.0"},
+     {:poison, "~> 2.0"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
