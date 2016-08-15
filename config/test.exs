@@ -17,3 +17,5 @@ config :deck_builder, DeckBuilder.Repo,
   database: "deck_builder_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :deck_builder, sql_sandbox: true

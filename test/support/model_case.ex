@@ -26,8 +26,10 @@ defmodule DeckBuilder.ModelCase do
   end
 
   setup tags do
+    Ecto.Adapters.SQL.Sandbox.checkout(DeckBuilder.Repo)
+
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(DeckBuilder.Repo, [])
+      Ecto.Adapters.SQL.Sandbox.mode(DeckBuilder.Repo, {:shared, self()})
     end
 
     :ok
