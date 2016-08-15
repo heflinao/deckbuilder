@@ -2,7 +2,7 @@ defmodule DeckBuilder.CardTest do
   use DeckBuilder.ModelCase
   alias DeckBuilder.Card
 
-  @valid_attrs %{api_id: "some content", colors: ["some content"], cost: "some content", formats: %{"thing": "some content"}, image_url: "some content", name: "some content", power: "some content", rules_text: "some content", toughness: "some content", url: "some content"}
+  @valid_attrs %{api_id: "some content", colors: ["some content"], cost: "some content", image_url: "some content", name: "some content", power: "some content", rules_text: "some content", toughness: "some content", url: "some content"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
