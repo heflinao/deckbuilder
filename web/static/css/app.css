@@ -23,12 +23,14 @@ form.link, form.button {
   border-bottom: 1px solid #e5e5e5;
 }
 .logo {
-  width: 519px;
-  height: 71px;
-  display: inline-block;
+  width: 450px;
+  height: 150px;
+  display: block;
   margin-bottom: 1em;
-  background-image: url("/images/phoenix.png");
-  background-size: 519px 71px;
+  background-image: url("/images/mtg_logo.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin: 0 auto;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
