@@ -1,36 +1,32 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
-</div>
-
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="http://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
+<%= for row <- card_rows(assigns) do %>
+  <div class="row">
+    <%= for card <- row do %>
+      <div class="col-xs-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <%= card.name %>
+          </div>
+          <div class="panel-body">
+            <img src="<%= card.image_url %>" class="col-xs-12">
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
+<% end %>
+<div class="row">
+  <div class="col-xs-2 col-xs-offset-5">
+    <%= unless first_page(assigns) do %>
+      <a href="<%= page_path(@conn, :index, page: prev_page(assigns)) %>">&laquo;</a>
+    <% end %>
 
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
+    <a href="<%= page_path(@conn, :index, page: 1) %>">1</a>
+    ...
+    <a href="<%= page_path(@conn, :index, page: assigns[:total_pages]) %>"><%= assigns[:total_pages] %></a>
+
+
+    <%= unless last_page(assigns) do %>
+      <a href="<%= page_path(@conn, :index, page: next_page(assigns)) %>">&raquo;</a>
+    <% end %>
   </div>
 </div>
