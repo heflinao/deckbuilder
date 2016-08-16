@@ -15,18 +15,23 @@
   </div>
 <% end %>
 <div class="row">
-  <div class="col-xs-2 col-xs-offset-5">
-    <%= unless first_page(assigns) do %>
-      <a href="<%= page_path(@conn, :index, page: prev_page(assigns)) %>">&laquo;</a>
-    <% end %>
+  <div class="col-xs-6 col-xs-offset-3">
+    <div class="text-center">
+      <%= unless first_page(assigns) do %>
+        <a class="btn btn-default btn-xs" href="<%= page_path(@conn, :index, page: prev_page(assigns)) %>">&laquo;</a>
+      <% end %>
 
-    <a href="<%= page_path(@conn, :index, page: 1) %>">1</a>
-    ...
-    <a href="<%= page_path(@conn, :index, page: assigns[:total_pages]) %>"><%= assigns[:total_pages] %></a>
+      <a class="btn btn-default btn-xs nudge-right" href="<%= page_path(@conn, :index, page: 1) %>">First Page</a>
+      <span>
+        <%= assigns[:page] %>
+        of
+        <%= assigns[:total_pages] %>
+      </span>
+      <a class="btn btn-default btn-xs nudge-left" href="<%= page_path(@conn, :index, page: assigns[:total_pages]) %>">Last Page</a>
 
-
-    <%= unless last_page(assigns) do %>
-      <a href="<%= page_path(@conn, :index, page: next_page(assigns)) %>">&raquo;</a>
-    <% end %>
+      <%= unless last_page(assigns) do %>
+        <a class="btn btn-default btn-xs" href="<%= page_path(@conn, :index, page: next_page(assigns)) %>">&raquo;</a>
+      <% end %>
+    </div>
   </div>
 </div>
