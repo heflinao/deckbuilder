@@ -28,7 +28,7 @@ defmodule DeckBuilder.Paginator do
   end
 
   defp total_pages(per_page) do
-    count = Repo.aggregate(Card, :count, :id)
+    count = Repo.one(from c in Card, select: count(c.id))
 
     (count / per_page)
     |> Float.ceil
