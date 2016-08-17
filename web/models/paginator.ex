@@ -2,8 +2,8 @@ defmodule DeckBuilder.Paginator do
   alias DeckBuilder.Repo
   alias DeckBuilder.Card
   import Ecto.Query
+
   defstruct [:page, :per_page, :records, :total_pages]
-  require IEx
 
   def new(query, params) do
     page = page(params)
