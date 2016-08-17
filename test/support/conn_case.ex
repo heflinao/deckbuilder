@@ -35,6 +35,10 @@ defmodule DeckBuilder.ConnCase do
   setup tags do
     unless tags[:async] do
       Ecto.Adapters.SQL.restart_test_transaction(DeckBuilder.Repo, [])
+
+      on_exit fn ->
+        Ecto.Adapters.SQL.rollback_test_transaction(DeckBuilder.Repo)
+      end
     end
 
     {:ok, conn: Phoenix.ConnTest.conn()}
