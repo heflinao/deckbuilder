@@ -12,11 +12,12 @@ defmodule DeckBuilder.Card do
     field :colors, {:array, :string}
     field :rules_text, :string
     field :formats, :map
+    field :types, {:array, :string}
 
     timestamps
   end
 
-  @required_fields ~w(name api_id url image_url cost colors rules_text)
+  @required_fields ~w(name api_id url image_url cost colors rules_text types)
   @optional_fields ~w(power toughness)
 
   @doc """
