@@ -21,14 +21,14 @@ defmodule DeckBuilder.Paginator do
 
   defp records_per_page(records, page, per_page) do
     Enum.chunk(records, per_page, per_page, [])
-    |> Enum.at(page)
+    |> Enum.at(page - 1)
   end
 
   defp total_pages(records, per_page) do
     count = length(records)
 
     (count / per_page)
-    |> Float.round
+    |> Float.ceil
     |> to_integer
   end
 
