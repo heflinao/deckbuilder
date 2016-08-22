@@ -1,5 +1,6 @@
 defmodule DeckBuilder.PageView do
   use DeckBuilder.Web, :view
+  require IEx
 
   def card_rows(params) do
     Enum.chunk(params[:cards], 3)
