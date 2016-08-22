@@ -5,45 +5,42 @@ defmodule DeckBuilder.Paginator do
 
   defstruct [:page, :per_page, :records, :total_pages]
 
-  def new(query, params) do
+  @defaults %{page: 1, per_page: 26}
+
+  def new(records, params \\ @defaults) do
     page = page(params)
     per_page = per_page(params)
-    records = records(query, page, per_page)
 
     %DeckBuilder.Paginator{
-      records: records,
+      records: records_per_page(records, page, per_page),
       page: page,
       per_page: per_page,
-      total_pages: total_pages(per_page)
+      total_pages: total_pages(records, per_page)
     }
   end
 
-  defp records(query, page, per_page) do
-    offset = (page - 1) * per_page
-
-    query
-    |> Ecto.Query.limit([_], ^per_page)
-    |> Ecto.Query.offset([_], ^offset)
-    |> Repo.all
+  defp records_per_page(records, page, per_page) do
+    Enum.chunk(records, per_page, per_page, [])
+    |> Enum.at(page)
   end
 
-  defp total_pages(per_page) do
-    count = Repo.one(from c in Card, select: count(c.id))
+  defp total_pages(records, per_page) do
+    count = length(records)
 
     (count / per_page)
-    |> Float.ceil
+    |> Float.round
     |> to_integer
   end
 
   defp page(params) do
     params
-    |> Map.get("page", 1)
+    |> Map.get("page", @defaults[:page])
     |> to_integer
   end
 
   defp per_page(params) do
     params
-    |> Map.get("per_page", 26)
+    |> Map.get("per_page", @defaults[:per_page])
     |> to_integer
   end
 
