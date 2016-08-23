@@ -3,7 +3,7 @@ defmodule DeckBuilder.PageView do
   require IEx
 
   def card_rows(params) do
-    Enum.chunk(params[:cards], 3)
+    Enum.chunk(params[:cards], 3, 3, [])
   end
 
   def next_page(params) do
