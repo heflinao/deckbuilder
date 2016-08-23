@@ -28,6 +28,4 @@ config :phoenix, :generators,
   migration: true,
   binary_id: false
 
-config :hound, driver: "phantomjs"
-
 config :deck_builder, ecto_repos: [DeckBuilder.Repo]
