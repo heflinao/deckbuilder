@@ -5,20 +5,28 @@
   <% end %>
 </div>
 
-<%= for row <- card_rows(assigns) do %>
-  <div class="row">
-    <%= for card <- row do %>
-      <%= content_tag(:div, class: "col-xs-4 card card-#{card.id}") do %>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <%= card.name %>
+<%= if assigns[:cards] do %>
+  <%= for row <- card_rows(assigns) do %>
+    <div class="row">
+      <%= for card <- row do %>
+        <%= content_tag(:div, class: "col-xs-4 card card-#{card.id}") do %>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <%= card.name %>
+            </div>
+            <div class="panel-body">
+              <img src="<%= card.image_url %>" class="col-xs-12">
+            </div>
           </div>
-          <div class="panel-body">
-            <img src="<%= card.image_url %>" class="col-xs-12">
-          </div>
-        </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <div class="row">
+    <div class="col-xs-4 col-xs-offset-4">
+      <p>There are no cards to display!</p>
+    </div>
   </div>
 <% end %>
 <div class="row">
