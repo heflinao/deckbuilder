@@ -4,6 +4,8 @@ defmodule DeckBuilder.FilteringTest do
   alias DeckBuilder.Card
   require IEx
 
+  hound_session
+  
   setup do
     Repo.insert!(Card.changeset(%Card{}, %{
       api_id: "admonition-angel",

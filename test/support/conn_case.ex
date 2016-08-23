@@ -19,7 +19,6 @@ defmodule DeckBuilder.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      use Hound.Helpers
 
       alias DeckBuilder.Repo
       import Ecto
@@ -27,8 +26,6 @@ defmodule DeckBuilder.ConnCase do
       import Ecto.Query, only: [from: 1, from: 2]
 
       import DeckBuilder.Router.Helpers
-      hound_session
-
 
       # The default endpoint for testing
       @endpoint DeckBuilder.Endpoint
