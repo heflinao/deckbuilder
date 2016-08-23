@@ -1,36 +1,51 @@
-<%= for row <- card_rows(assigns) do %>
+<div class="row">
+  <%= form_for @conn, page_path(@conn, :index), [as: :types], fn f -> %>
+    <%= select(f, :types, ["Creature": "creature", "Artifact": "artifact", "Instant": "instant", "Enchantment": "enchantment"], prompt: "Choose a card type", selected: nil, id: "type_filter") %>
+    <%= submit "Submit", id: "type_filter_submit" %>
+  <% end %>
+</div>
+
+<%= if assigns[:cards] do %>
+  <%= for row <- card_rows(assigns) do %>
+    <div class="row">
+      <%= for card <- row do %>
+        <%= content_tag(:div, class: "col-xs-4 card card-#{card.id}") do %>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <%= card.name %>
+            </div>
+            <div class="panel-body">
+              <img src="<%= card.image_url %>" class="col-xs-12">
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
   <div class="row">
-    <%= for card <- row do %>
-      <div class="col-xs-4">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <%= card.name %>
-          </div>
-          <div class="panel-body">
-            <img src="<%= card.image_url %>" class="col-xs-12">
-          </div>
-        </div>
-      </div>
-    <% end %>
+    <div class="col-xs-4 col-xs-offset-4">
+      <p>There are no cards to display!</p>
+    </div>
   </div>
 <% end %>
 <div class="row">
   <div class="col-xs-6 col-xs-offset-3">
     <div class="text-center">
       <%= unless first_page(assigns) do %>
-        <a class="btn btn-default btn-xs" href="<%= page_path(@conn, :index, page: prev_page(assigns)) %>">&laquo;</a>
+        <a class="btn btn-default btn-xs" href="<%= page_path(@conn, :index, page: prev_page(assigns), types: %{types: assigns[:types]}) %>">&laquo;</a>
+        <a class="btn btn-default btn-xs nudge-right" href="<%= page_path(@conn, :index, page: 1, types: %{types: assigns[:types]}) %>">First Page</a>
       <% end %>
 
-      <a class="btn btn-default btn-xs nudge-right" href="<%= page_path(@conn, :index, page: 1) %>">First Page</a>
       <span>
         <%= assigns[:page] %>
         of
         <%= assigns[:total_pages] %>
       </span>
-      <a class="btn btn-default btn-xs nudge-left" href="<%= page_path(@conn, :index, page: assigns[:total_pages]) %>">Last Page</a>
+      <a class="btn btn-default btn-xs nudge-left" href="<%= page_path(@conn, :index, page: assigns[:total_pages], types: %{types: assigns[:types]}) %>">Last Page</a>
 
       <%= unless last_page(assigns) do %>
-        <a class="btn btn-default btn-xs" href="<%= page_path(@conn, :index, page: next_page(assigns)) %>">&raquo;</a>
+        <a class="btn btn-default btn-xs" href="<%= page_path(@conn, :index, page: next_page(assigns), types: %{types: assigns[:types]}) %>">&raquo;</a>
       <% end %>
     </div>
   </div>

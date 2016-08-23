@@ -39,8 +39,8 @@ defmodule DeckBuilder.PaginatorTest do
   end
 
   test "changeset with valid attributes" do
-    query = Card |> order_by(asc: :name)
-    paginator = DeckBuilder.Paginator.new(query, @valid_attrs)
+    cards = Card |> order_by(asc: :name) |> Repo.all
+    paginator = DeckBuilder.Paginator.new(cards, @valid_attrs)
     card = Repo.get_by(Card, name: "Admonition Angel")
 
     assert paginator.page == 2
@@ -50,9 +50,8 @@ defmodule DeckBuilder.PaginatorTest do
   end
 
   test "changeset with no attributes" do
-    query = Card |> order_by(asc: :name)
-    paginator = DeckBuilder.Paginator.new(query, @no_attrs)
-    cards = Repo.all(query)
+    cards = Card |> order_by(asc: :name) |> Repo.all
+    paginator = DeckBuilder.Paginator.new(cards, @no_attrs)
 
     assert paginator.page == 1
     assert paginator.per_page == 26
